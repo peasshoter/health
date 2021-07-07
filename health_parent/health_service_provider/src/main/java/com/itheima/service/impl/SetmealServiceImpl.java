@@ -127,18 +127,4 @@ public class SetmealServiceImpl implements SetmealService {
         }
     }
 
-    public static void main(String[] args) {
-
-//        try {
-//            InputStreamReader fileInputStream = new InputStreamReader(new FileInputStream("H:/开发/itcast_health/health_parent/health_service_provider/src/main/resources/freemarker.properties"), "GBK");
-//            BufferedReader reader = new BufferedReader(fileInputStream);
-//            String strTmp = "";
-//            while ((strTmp = reader.readLine()) != null) {
-//                System.out.println(strTmp);
-//            }
-//            reader.close();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-    }
 }

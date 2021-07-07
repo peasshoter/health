@@ -1,5 +1,10 @@
 package com.itheima.dao;
 
+import com.github.pagehelper.Page;
+import com.itheima.entity.PageResult;
+import com.itheima.entity.QueryPageBean;
+import com.itheima.entity.Result;
+import com.itheima.pojo.Order;
 import com.itheima.pojo.OrderSetting;
 
 import java.util.Date;
@@ -14,4 +19,5 @@ public interface OrderSettingDao {
     void editReservationsByOrderDate(OrderSetting orderSetting);
     List<OrderSetting> getOrderSettingByDate(Map<String, Object> map);
 
+    Page<Order> findPage(String queryString);
 }

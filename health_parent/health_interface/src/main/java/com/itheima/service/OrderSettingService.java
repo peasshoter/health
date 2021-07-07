@@ -1,5 +1,7 @@
 package com.itheima.service;
 
+import com.itheima.entity.PageResult;
+import com.itheima.entity.QueryPageBean;
 import com.itheima.pojo.OrderSetting;
 
 import java.util.List;
@@ -11,4 +13,6 @@ public interface OrderSettingService {
     List<Map> getOrderSettingByDate(String date);
 
     void OrderSet(OrderSetting orderSetting);
+
+    PageResult findPage(QueryPageBean queryPageBean);
 }

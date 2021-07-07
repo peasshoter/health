@@ -2,6 +2,8 @@ package com.itheima.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.itheima.constant.MessageConstant;
+import com.itheima.entity.PageResult;
+import com.itheima.entity.QueryPageBean;
 import com.itheima.entity.Result;
 import com.itheima.pojo.OrderSetting;
 import com.itheima.service.OrderSettingService;
@@ -48,7 +50,7 @@ public class OrderSettingController {
     public Result getOrderSettingByDate(String date) {
         try {
             List<Map> list = orderSettingService.getOrderSettingByDate(date);
-            return new Result(true, MessageConstant.GET_ORDERSETTING_SUCCESS,list);
+            return new Result(true, MessageConstant.GET_ORDERSETTING_SUCCESS, list);
         } catch (Exception e) {
             e.printStackTrace();
             return new Result(false, MessageConstant.GET_ORDERSETTING_FAIL);
@@ -68,4 +70,10 @@ public class OrderSettingController {
 
     }
 
+    @RequestMapping("/findpage")
+    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+
+        return orderSettingService.findPage(queryPageBean);
+
+    }
 }
