@@ -26,11 +26,30 @@
       update  t_ordersetting  set reservations=#{reservations} where orderDate=#{orderDate}
     </update>
 
-    <select id="findPage" parameterType="String" resultType="com.itheima.pojo.Order">
-        SELECT o.setmeal_id ,o.`orderDate`,o.`orderAddr`,m.`name`,m.`phoneNumber`,o.`orderType`,o.`orderStatus` FROM
-        t_order o,t_member m where o.`member_id`=m.`id`
-        <if test="value!=null and value.length>0">
-            or m.fileNumber=#{value} or m.name=#{value} or m.phoneNumber=#{value}
-        </if>
+    <!-- <select id="findPage" parameterType="String" resultType="com.itheima.pojo.Order">
+        SELECT
+        o.setmeal_id,
+        o.`orderDate`,
+        o.`orderAddr`,
+        m.`name`,
+        m.`phoneNumber`,
+        o.`orderType`,
+        o.`orderStatus`
+        FROM
+        t_order o,t_member m
+        where o.`member_id`=m.`id`
+    </select> -->
+    <select id="findPage" parameterType="String" resultType="map">
+        SELECT
+        o.setmeal_id,
+        o.`orderDate`,
+        o.`orderAddr`,
+        m.`name`,
+        m.`phoneNumber`,
+        o.`orderType`,
+        o.`orderStatus`
+        FROM
+        t_order o,t_member m
+        where o.`member_id`=m.`id`
     </select>
 </mapper>

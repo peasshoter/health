@@ -18,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import redis.clients.jedis.JedisPool;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/setmeal")
@@ -57,4 +58,15 @@ public class SetmealController {
         return  setmealService.findpage(queryPageBean);
     }
 
+    @RequestMapping("findAll")
+    public Result findAll() {
+        try {
+            List<Setmeal> list = setmealService.findAll();
+
+            return new Result(true, MessageConstant.QUERY_CHECKGROUP_SUCCESS, list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.QUERY_CHECKGROUP_FAIL);
+        }
+    }
 }

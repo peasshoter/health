@@ -12,12 +12,15 @@ import java.util.List;
 import java.util.Map;
 
 public interface OrderSettingDao {
-    public void add(OrderSetting orderSetting);
+    public void add1(OrderSetting orderSetting);
     public void editNumberByOrderDate(OrderSetting orderSetting);
     public long findCountByOrderDate(Date orderDate);
     OrderSetting findByOrderDate(Date orderDate);
     void editReservationsByOrderDate(OrderSetting orderSetting);
     List<OrderSetting> getOrderSettingByDate(Map<String, Object> map);
 
-    Page<Order> findPage(String queryString);
+    // Page<Object> findPage(String queryString);
+    List<Map<String, Object>> findPage(String queryString);
+
+    void add(OrderSetting ordersetting);
 }

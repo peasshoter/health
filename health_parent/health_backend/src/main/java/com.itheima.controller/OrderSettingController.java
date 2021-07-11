@@ -1,6 +1,7 @@
 package com.itheima.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
+import com.github.pagehelper.PageInfo;
 import com.itheima.constant.MessageConstant;
 import com.itheima.entity.PageResult;
 import com.itheima.entity.QueryPageBean;
@@ -37,7 +38,7 @@ public class OrderSettingController {
                 OrderSetting orderSetting = new OrderSetting(new Date(orderDate), Integer.parseInt(number));
                 data.add(orderSetting);
             }
-            orderSettingService.add(data);
+            orderSettingService.add1(data);
             return new Result(true, MessageConstant.IMPORT_ORDERSETTING_SUCCESS);
         } catch (IOException e) {
             e.printStackTrace();
@@ -70,10 +71,28 @@ public class OrderSettingController {
 
     }
 
+    //    @RequestMapping("/findpage")
+//    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+//
+//        return orderSettingService.findPage(queryPageBean);
+//
+//    }
     @RequestMapping("/findpage")
-    public PageResult findPage(@RequestBody QueryPageBean queryPageBean) {
+    public Map<String, Object> findPage(@RequestBody QueryPageBean queryPageBean) {
 
         return orderSettingService.findPage(queryPageBean);
+
+    }
+
+    @RequestMapping("/add")
+    public Result add(Integer[] setmealIds, @RequestBody OrderSetting orderSetting) {
+        try {
+            orderSettingService.add(setmealIds, orderSetting);
+            return new Result(true, MessageConstant.ADD_SETMEAL_SUCCESS);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new Result(false, MessageConstant.ADD_SETMEAL_FAIL);
+        }
 
     }
 }

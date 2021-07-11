@@ -202,8 +202,9 @@
                                             <td>
                                                 <input :id="c.id" v-model="setmealIds" type="checkbox" :value="c.id">
                                             </td>
-                                            <td><label :for="c.id">{{c.code}}</label></td>
                                             <td><label :for="c.id">{{c.name}}</label></td>
+                                            <td><label :for="c.id">{{ c.sex == '0' ? '不限' : c.sex == '1' ? '男' :
+                                                '女'}}</label></td>
                                             <td><label :for="c.id">{{c.remark}}</label></td>
                                         </tr>
                                         </tbody>
@@ -249,8 +250,8 @@
 
             //添加
             handleAdd() {
-                console.log(this.formData);
-                console.log(this.setmealIds);
+                // console.log(this.formData);
+                // console.log(this.setmealIds);
                 axios.post("/ordersetting/add.do?setmealIds=" + this.setmealIds, this.formData).then((res) => {
                     this.dialogFormVisible = false;
                     if (res.data.flag) {
@@ -276,7 +277,10 @@
                 }
                 axios.post("/ordersetting/findpage.do", para).then((res => {
                     this.pagination.total = res.data.total;
-                    this.dataList = res.data.rows;
+                    console.log(res.data.result);
+                    //{"result":[{"orderType":"微信预约","phoneNumber":"18511279942","setmeal_id":12,"name":"test","orderStatus":"未到诊","orderDate":"2019-04-28 00:00:00","orderAddr":"1"},{"orderType":"微信预约","phoneNumber":"13412345678","setmeal_id":15,"name":"王美丽","orderStatus":"未到诊","orderDate":"2021-06-29 00:00:00","orderAddr":"2"},{"orderType":"微信预约","phoneNumber":"13412345678","setmeal_id":12,"name":"王美丽","orderStatus":"已到诊","orderDate":"2021-07-03 00:00:00","orderAddr":"3"}],"total":3}
+                    //pageresult:{"rows":[{"orderType":"微信预约","phoneNumber":"18511279942","name":"test","orderStatus":"未到诊","orderDate":"2019-04-28 00:00:00","orderAddr":"1"},{"orderType":"微信预约","phoneNumber":"13412345678","name":"王美丽","orderStatus":"未到诊","orderDate":"2021-06-29 00:00:00","orderAddr":"2"},{"orderType":"微信预约","phoneNumber":"13412345678","name":"王美丽","orderStatus":"已到诊","orderDate":"2021-07-03 00:00:00","orderAddr":"3"}],"total":3}
+                    this.dataList = res.data.result;
                 }))
 
             },
@@ -291,7 +295,7 @@
             handleCreate() {
                 this.resetForm();
                 this.dialogFormVisible = true;
-                axios.get("/ordersetting/findAll.do").then((res) => {
+                axios.get("/setmeal/findAll.do").then((res) => {
                     if (res.data.flag) {
                         this.tableData = res.data.data;
                     } else {
